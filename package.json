@@ -1,0 +1,24 @@
+{
+  "name": "quiz-generator",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "2.8.0",
+    "vite": "^3.2.3",
+    "vitest": "^0.25.3"
+  },
+  "dependencies": {
+    "client-zip": "^2.3.0",
+    "nanoid": "^4.0.0",
+    "xml-formatter": "^2.6.1"
+  }
+}
