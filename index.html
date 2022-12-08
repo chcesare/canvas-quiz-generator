@@ -2,17 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz Generator</title>
+    <title>Canvas Quiz Generator</title>
+    <link rel="stylesheet" href="src/style.css">
   </head>
   <body>
     <body>
+      <h1>Canvas Quiz Generator</h1>
       <p>Paste your quiz questions below.</p>
       <form>
-        <textarea rows="10"></textarea>
         <div>
-          <button type="submit">Get QTI file</button>
+        <input type="text" placeholder="Enter quiz title here">
+        </div>
+        <div>
+        <textarea maxlength="20000" rows="25" placeholder="Enter quiz questions here"></textarea>
+        </div>
+        <div>
+          <button type="submit" disabled>Download Quiz</button>
         </div>
       </form>
     <script type="module" src="src/index.js"></script>

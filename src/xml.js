@@ -60,6 +60,16 @@ export function buildAssessmentXml(questions, quizTitle, quizId) {
       }
     }
 
+    if (question.text == '<p></p>') {
+      throw new Error(`Include question text for question ${questions.indexOf(question) + 1}`);
+    }
+    if (question.type != 'essay_question' && question.answers.length == 0) {
+      throw new Error(
+        `Include answers for question ${
+          questions.indexOf(question) + 1
+        }, or specify Type: E for essay question`
+      );
+    }
     if (question.type != 'essay_question' && question.correctAnswerIds.length == 0) {
       throw new Error(`Specify correct answer for question ${questions.indexOf(question) + 1}`);
     }

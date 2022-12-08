@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+div > input {
+  margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input[type='text'] {
+  width: 500px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 2px #ccc;
+}
+
+div > textarea {
+  margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+textarea {
+  width: 650px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+  box-shadow: 2px 2px 2px #ccc;
+}
+
+div > button {
+  margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  font-size: 16px;
+  box-shadow: 2px 2px 2px #ccc;
+}
+
+button:enabled {
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+button:disabled {
+  color: rgb(139, 139, 139);
+}

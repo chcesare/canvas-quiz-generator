@@ -13,8 +13,6 @@ class Question {
   }
 }
 
-//console.log(crypto.randomUUID());
-
 //Answer IDs only need to be locally unique, so using function very similar to function in Canvas exporter here:
 //https://github.com/instructure/canvas-lms/blob/c2cba46851df512ab26e827e4bdad76b848f6db9/gems/plugins/qti_exporter/lib/qti/assessment_item_converter.rb
 let ids = {};
@@ -36,12 +34,19 @@ export function parseQuestionsAndAnswers(text) {
   let questions = [];
   let question;
   let index = 0;
+
+  function failure(error, lineNumber) {
+    lineNumber = lineNumber + 1;
+    error.lineNumber = lineNumber;
+    return error;
+  }
+
   text.split(/\r?\n/).forEach((line, i) => {
     let match;
     if ((match = line.match(/^ *Points? *: *(\d+.?\d*)?/i))) {
       let points = Number(match[1]);
       if (isNaN(points) || !points) {
-        throw new Error(`Please insert a valid point value on line ${i + 1}`);
+        throw failure(Error(`Please insert a valid point value on line ${i + 1}`), i);
       }
       if (questions[index]) {
         question.points = points;
@@ -49,11 +54,14 @@ export function parseQuestionsAndAnswers(text) {
         question = questions[index] = new Question('', [], points, 'multiple_choice_question');
       }
     } else if ((match = line.match(/^ *Type *: *(?:(E)|(MC|TF|MA))?/i))) {
+      if (!match[1] && !match[2]) {
+        throw failure(new Error(`Please specify a question type on line ${i + 1}`), i);
+
+        //throw new Error(`Please specify a question type on line ${i + 1}`);
+      }
       if (questions[index]) {
         if (match[1]) {
           question.type = 'essay_question';
-        } else if (!match[2]) {
-          throw new Error(`Please specify a question type on line ${i + 1}`);
         }
       } else {
         question = questions[index] = new Question('', [], 1, 'essay_question');
@@ -82,10 +90,12 @@ export function parseQuestionsAndAnswers(text) {
       answers.push(answer);
     }
     //extra lines of text must be in between question number line and answers
-    else if ((match = line.match(/^( *.+)/) && question.text && question.answers.length == 0)) {
+    else if (
+      (match = line.match(/^( *.+)/) && question && question.text && question.answers.length == 0)
+    ) {
       question.text += `<p>${line.trim()}</p>`;
     } else if ((match = line.match(/^ *.+/))) {
-      throw new Error(`Unexpected input on line ${i}`);
+      throw failure(Error(`Unexpected input on line ${i + 1}`), i);
     }
   });
   return questions;

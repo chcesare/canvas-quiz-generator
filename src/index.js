@@ -1,62 +1,54 @@
-//Respondus QTI version: 1.1.3
-//Canvas supported version: 1.2 and 2.1
-//SDSU tool version: 1.2
-
 import { downloadZip } from 'client-zip';
 import { nanoid } from 'nanoid';
 import { parseQuestionsAndAnswers } from './parser.js';
 import { buildAssessmentXml, createXmlMetadataString, createImsManifestString } from './xml.js';
 
 const form = document.querySelector('form');
-//const textArea = document.querySelector('textarea');
+const textArea = document.querySelector('textarea');
+const titleInput = document.querySelector('input');
+const button = document.querySelector('button');
+let errorMessage;
+
+textArea.addEventListener('input', () => {
+  button.disabled = false;
+});
+
+titleInput.addEventListener('input', () => {
+  button.disabled = false;
+});
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  let input = `Points: 1
-1) Which of the "following" is not a threat to information assets to be considered under identifying potential vulnerabilities and threats?
-a) Noncompliance fines and sanctions
-*b) Ransomware
-c) Data breaches
-d) None of the above
-
-Points: 2
-2) Which of the following is an answer?
-*a) Test
-b) tsdfsd
-c) sdasd
-d) Nrtuazc
-
-Points: 12
-Type: E
-3) Write an essay
-a) Noncompliance
-
-4) Multiple Answers?
-a) Blue
-*b) Red
-c) Yellow
-*d) orange
-
-5) Multiple
-Lines
-of text in question
-a) X
-*b) Y
-c) Z
-d) A
-
-Points: 5
-6) True or false: is x or y?
-a) True
-*b) False`;
-  console.log(parseQuestionsAndAnswers(input));
-  const id = nanoid();
-  const title = escapeHTML('<p>&</p>>');
-
-  const date = new Date().toISOString().slice(0, 10);
-  const quiz = buildAssessmentXml(parseQuestionsAndAnswers(input), title, id);
-  const xmlMetaData = createXmlMetadataString(id, title, quiz.totalPoints);
-  const imsManifest = createImsManifestString(id, title, date);
-  createZip(id, quiz.questions, xmlMetaData, imsManifest);
+  if (errorMessage) {
+    errorMessage.remove();
+  }
+  button.disabled = true;
+  try {
+    const input = textArea.value;
+    const title = escapeHTML(titleInput.value);
+    if (!input && !title) {
+      throw new Error('Please enter a quiz title and questions in the fields above.');
+    } else if (input && !title) {
+      throw new Error('Please enter a title for the quiz.');
+    } else if (!input && title) {
+      throw new Error('Please enter your quiz questions.');
+    }
+    const questions = parseQuestionsAndAnswers(input);
+    const id = nanoid();
+    const date = new Date().toISOString().slice(0, 10);
+    const quiz = buildAssessmentXml(questions, title, id);
+    const xmlMetaData = createXmlMetadataString(id, title, quiz.totalPoints);
+    const imsManifest = createImsManifestString(id, title, date);
+    createZip(title, id, quiz.questions, xmlMetaData, imsManifest);
+  } catch (error) {
+    errorMessage = document.createElement('div');
+    errorMessage.textContent = error;
+    errorMessage.style = 'color: red;';
+    textArea.after(errorMessage);
+    if (error.lineNumber) {
+      jump(error.lineNumber);
+    }
+  }
 });
 
 function escapeHTML(string) {
@@ -66,7 +58,7 @@ function escapeHTML(string) {
   return pre.innerHTML;
 }
 
-async function createZip(id, assessmentXMLString, xmlMetadataString, imsManifestString) {
+async function createZip(title, id, assessmentXMLString, xmlMetadataString, imsManifestString) {
   // define what we want in the ZIP
   const assessmentXML = {
     name: `${id}/${id}.xml`,
@@ -96,10 +88,16 @@ async function createZip(id, assessmentXMLString, xmlMetadataString, imsManifest
   const link = document.createElement('a');
   const url = URL.createObjectURL(blob);
   link.href = url;
-  link.download = `${id}.zip`;
+  link.download = `${title}.zip`;
   link.click();
   link.remove();
 
   // in real life, don't forget to revoke your Blob URLs if you use them
   URL.revokeObjectURL(url);
+}
+
+function jump(line) {
+  const lineHeight = textArea.scrollHeight / textArea.rows;
+  const jump = (line - 1) * lineHeight;
+  textArea.scrollTop = jump;
 }
