@@ -1,12 +1,45 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
+}
+
+.columns {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.column {
+  flex: 25%;
+}
+
+.main-content {
   text-align: center;
+  flex: 50%;
 }
 
 h1 {
   text-align: center;
   color: #333;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+.instructions h2:not(:first-child) {
+  margin-top: 8%;
+}
+
+h3 {
+  margin-top: 8%;
+  margin-bottom: 1%;
 }
 
 p {
@@ -21,21 +54,19 @@ div > input {
 }
 
 input[type='text'] {
-  width: 500px;
+  width: 26vw;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 2px #ccc;
 }
 
-div > textarea {
+form textarea {
   margin: 10px;
   margin-left: auto;
   margin-right: auto;
-}
-
-textarea {
-  width: 650px;
+  width: 34vw;
+  height: 44vh;
   border: 1px solid #ccc;
   padding: 10px;
   font-size: 16px;
@@ -71,12 +102,50 @@ button:disabled {
 
 .sidebar {
   position: absolute;
-  width: 200px;
-  height: 90vh;
-  left: -200px;
+  /* background-color: rgb(151, 151, 151); */
+  margin: 0;
+  padding: 0;
+  width: 25vw;
+  height: 100vh;
+  left: -25%;
+  top: 0%;
+  box-shadow: 2px 2px 2px #ccc;
+  transition: 0.5s;
+  overflow: auto;
 }
 
-.expanded {
-  transition: 0.5s;
+.sidebar.expanded {
   left: 0px;
+}
+
+.instructions {
+  padding: 0 15px;
+}
+
+.question-example {
+  font-family: monospace;
+  line-height: normal;
+}
+
+.tab {
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  margin: 0;
+  color: rgb(221, 221, 221);
+  font-weight: bold;
+  font-size: 25px;
+  background-color: rgb(139, 139, 139);
+  border-radius: 0 100% 100% 0;
+  --tab-height: 13.5vh;
+  height: var(--tab-height);
+  width: 27px;
+  position: absolute;
+  top: calc(50vh - var(--tab-height) / 2);
+  left: 0%;
+  transition: 0.5s;
+}
+
+.tab.expanded {
+  left: 25%;
 }
