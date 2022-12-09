@@ -48,7 +48,7 @@ div > button {
   margin-right: auto;
 }
 
-button {
+button[type='submit'] {
   background-color: #333;
   color: #fff;
   padding: 10px 20px;
@@ -67,4 +67,16 @@ button:hover {
 
 button:disabled {
   color: rgb(139, 139, 139);
+}
+
+.sidebar {
+  position: absolute;
+  width: 200px;
+  height: 90vh;
+  left: -200px;
+}
+
+.expanded {
+  transition: 0.5s;
+  left: 0px;
 }

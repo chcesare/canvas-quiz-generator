@@ -9,6 +9,11 @@ const titleInput = document.querySelector('input');
 const button = document.querySelector('button');
 let errorMessage;
 
+const sidebar = document.querySelector('.sidebar');
+document.querySelector('.arrow').addEventListener('click', () => {
+  sidebar.classList.toggle('expanded');
+});
+
 textArea.addEventListener('input', () => {
   button.disabled = false;
 });
