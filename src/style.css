@@ -12,16 +12,16 @@ body {
 .columns {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 100vw;
 }
 
 .column {
-  flex: 25%;
+  flex: 25vw;
 }
 
 .main-content {
   text-align: center;
-  flex: 50%;
+  flex: 50vw;
 }
 
 h1 {
@@ -49,8 +49,6 @@ p {
 
 div > input {
   margin: 10px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 input[type='text'] {
@@ -63,8 +61,6 @@ input[type='text'] {
 
 form textarea {
   margin: 10px;
-  margin-left: auto;
-  margin-right: auto;
   width: 34vw;
   height: 44vh;
   border: 1px solid #ccc;
@@ -75,8 +71,6 @@ form textarea {
 
 div > button {
   margin: 10px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 button[type='submit'] {
@@ -102,20 +96,20 @@ button:disabled {
 
 .sidebar {
   position: absolute;
-  /* background-color: rgb(151, 151, 151); */
+  background-color: #f4f4f4;
   margin: 0;
   padding: 0;
-  width: 25vw;
+  width: 23.6vw;
   height: 100vh;
-  left: -25%;
-  top: 0%;
+  left: -23.6vw;
+  top: 0vh;
   box-shadow: 2px 2px 2px #ccc;
   transition: 0.5s;
   overflow: auto;
 }
 
 .sidebar.expanded {
-  left: 0px;
+  left: 0vw;
 }
 
 .instructions {
@@ -129,23 +123,25 @@ button:disabled {
 
 .tab {
   box-sizing: border-box;
-  display: inline-block;
+  font-family: monospace;
+  font-size: min(25px, 5vw);
   border: none;
+  padding: 0;
   margin: 0;
   color: rgb(221, 221, 221);
-  font-weight: bold;
-  font-size: 25px;
   background-color: rgb(139, 139, 139);
   border-radius: 0 100% 100% 0;
   --tab-height: 13.5vh;
+  --tab-width: 1.4vw;
   height: var(--tab-height);
-  width: 27px;
+  width: var(--tab-width);
+  min-width: 22px;
   position: absolute;
   top: calc(50vh - var(--tab-height) / 2);
-  left: 0%;
-  transition: 0.5s;
+  left: 0vw;
+  transition: left 0.5s;
 }
 
 .tab.expanded {
-  left: 25%;
+  left: 23.6vw;
 }

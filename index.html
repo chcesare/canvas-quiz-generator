@@ -7,58 +7,62 @@
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <button class="tab">&gt;</button>
-    <div class="sidebar">
-      <div class="instructions">
-        <h2>Instructions</h2>
-        <p>
-          To use, write or paste a quiz in the required format in the main text field. Clicking
-          "Download Quiz" will give you a .zip file suitable for import into Canvas LMS.
-        </p>
-        <p>
-          Only the four question types listed above are supported at this time. Note that formatting
-          such as bold and italics will not paste in automatically; however, you can write in HTML
-          tags.
-        </p>
-        <h2>Required Formatting</h2>
-        <p>Points are optional; if omitted, they default to 1.</p>
-        <h3><strong>Multiple Choice</strong></h3>
-        <p class="question-example">
-          Points: 1<br />
-          1) Question Text<br />
-          a) Answer Choice<br />
-          *b) Correct Answer Choice<br />
-          c) Answer Choice<br />
-          d) Answer Choice<br />
-        </p>
-        <h3><strong>Multiple Answer</strong></h3>
-        <p class="question-example">
-          Points: 1<br />
-          1) Question Text<br />
-          a) Answer Choice<br />
-          *b) Correct Answer Choice<br />
-          c) Answer Choice<br />
-          *d) Correct Answer Choice<br />
-        </p>
-        <h3><strong>True/False</strong></h3>
-        <p class="question-example">
-          Points: 1<br />
-          1) Question Text<br />
-          *a) True<br />
-          b) False<br />
-        </p>
-        <h3>
-          <strong>Essay question</strong>
-        </h3>
-        <p class="question-example">
-          Type: E<br />
-          Points: 5<br />
-          1) Question Text<br />
-        </p>
-      </div>
-    </div>
     <div class="columns">
-      <div class="column"></div>
+      <div class="column">
+        <button class="tab">&gt;</button>
+        <div class="sidebar">
+          <div class="instructions">
+            <h2>Instructions</h2>
+            <p>
+              To use, write or paste a quiz in the required format in the main text field. Clicking
+              "Download Quiz" will download a .zip file suitable for import into Canvas LMS.
+            </p>
+            <p>
+              Only the four question types listed below are supported at this time. Note that
+              formatting such as bold and italics will not paste in automatically; however, you can
+              write in HTML tags if desired.
+            </p>
+            <h2>Required Formatting</h2>
+            <p>
+              The points line is optional; if omitted, the question defaults to 1 point. An asterisk
+              before the letter of an answer choice indicates that the answer is correct.
+            </p>
+            <h3><strong>Multiple Choice</strong></h3>
+            <p class="question-example">
+              Points: 1<br />
+              1) Question Text<br />
+              a) Answer Choice<br />
+              *b) Correct Answer Choice<br />
+              c) Answer Choice<br />
+              d) Answer Choice<br />
+            </p>
+            <h3><strong>Multiple Answer</strong></h3>
+            <p class="question-example">
+              Points: 1<br />
+              1) Question Text<br />
+              a) Answer Choice<br />
+              *b) Correct Answer Choice<br />
+              c) Answer Choice<br />
+              *d) Correct Answer Choice<br />
+            </p>
+            <h3><strong>True/False</strong></h3>
+            <p class="question-example">
+              Points: 1<br />
+              1) Question Text<br />
+              *a) True<br />
+              b) False<br />
+            </p>
+            <h3>
+              <strong>Essay question</strong>
+            </h3>
+            <p class="question-example">
+              Type: E<br />
+              Points: 5<br />
+              1) Question Text<br />
+            </p>
+          </div>
+        </div>
+      </div>
       <div class="main-content">
         <h1>Canvas Quiz Generator</h1>
         <p>
