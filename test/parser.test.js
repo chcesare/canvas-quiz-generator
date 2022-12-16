@@ -2,7 +2,7 @@ import { parseQuestionsAndAnswers } from '../src/parser';
 //import { buildQuestionXml } from '../src/xml';
 import { expect, test } from 'vitest';
 
-test('generated object matches Canvas export model', () => {
+test('generated quiz object matches Canvas export model', () => {
   const questionsObject = parseQuestionsAndAnswers(questionInput);
   for (let i = 0; i < questionsObject.length; i++) {
     expect(questionsObject[i]).toMatchObject(questionsModel[i]);
