@@ -7,19 +7,79 @@
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <h1>Canvas Quiz Generator</h1>
-    <p>Paste your quiz questions below.</p>
-    <form>
-      <div>
-        <input type="text" placeholder="Enter quiz title here" />
+    <div class="columns">
+      <div class="column"></div>
+      <div class="main-content">
+        <h1>Canvas Quiz Generator</h1>
+        <p>
+          Paste your quiz questions below. For detailed instructions and required formatting, click
+          the tab on the left side of the page.
+        </p>
+        <form>
+          <div>
+            <input type="text" placeholder="Enter quiz title here" />
+          </div>
+          <textarea maxlength="20000" placeholder="Enter quiz questions here"></textarea>
+          <div>
+            <button type="submit" disabled>Download Quiz</button>
+          </div>
+        </form>
       </div>
-      <div>
-        <textarea maxlength="20000" rows="25" placeholder="Enter quiz questions here"></textarea>
+      <div class="column"></div>
+    </div>
+    <button class="tab">&gt;</button>
+    <div class="sidebar">
+      <div class="instructions">
+        <h2>Instructions</h2>
+        <p>
+          To use, write or paste a quiz in the required format in the main text field. Clicking
+          "Download Quiz" will download a .zip file suitable for import into Canvas LMS.
+        </p>
+        <p>
+          Only the four question types listed below are supported at this time. Note that formatting
+          such as bold and italics will not paste in automatically; however, you can write in HTML
+          tags if desired.
+        </p>
+        <h2>Required Formatting</h2>
+        <p>
+          The points line is optional; if omitted, the question defaults to 1 point. An asterisk
+          before the letter of an answer choice indicates that the answer is correct.
+        </p>
+        <h3><strong>Multiple Choice</strong></h3>
+        <p class="question-example">
+          Points: 1<br />
+          1) Question Text<br />
+          a) Answer Choice<br />
+          *b) Correct Answer Choice<br />
+          c) Answer Choice<br />
+          d) Answer Choice<br />
+        </p>
+        <h3><strong>Multiple Answer</strong></h3>
+        <p class="question-example">
+          Points: 1<br />
+          1) Question Text<br />
+          a) Answer Choice<br />
+          *b) Correct Answer Choice<br />
+          c) Answer Choice<br />
+          *d) Correct Answer Choice<br />
+        </p>
+        <h3><strong>True/False</strong></h3>
+        <p class="question-example">
+          Points: 1<br />
+          1) Question Text<br />
+          *a) True<br />
+          b) False<br />
+        </p>
+        <h3>
+          <strong>Essay question</strong>
+        </h3>
+        <p class="question-example">
+          Type: E<br />
+          Points: 5<br />
+          1) Question Text<br />
+        </p>
       </div>
-      <div>
-        <button type="submit" disabled>Download Quiz</button>
-      </div>
-    </form>
+    </div>
     <script type="module" src="src/index.js"></script>
   </body>
 </html>

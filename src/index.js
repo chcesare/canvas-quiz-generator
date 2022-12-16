@@ -6,8 +6,21 @@ import { buildAssessmentXml, createXmlMetadataString, createImsManifestString } 
 const form = document.querySelector('form');
 const textArea = document.querySelector('textarea');
 const titleInput = document.querySelector('input');
-const button = document.querySelector('button');
+const button = document.querySelector('button[type="submit"]');
 let errorMessage;
+
+const sidebar = document.querySelector('.sidebar');
+const tab = document.querySelector('.tab');
+tab.addEventListener('click', () => {
+  sidebar.classList.toggle('expanded');
+
+  tab.classList.toggle('expanded');
+  if (tab.classList.contains('expanded')) {
+    tab.textContent = '<';
+  } else {
+    tab.textContent = '>';
+  }
+});
 
 textArea.addEventListener('input', () => {
   button.disabled = false;
