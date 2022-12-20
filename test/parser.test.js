@@ -1,5 +1,4 @@
 import { parseQuestionsAndAnswers } from '../src/parser';
-//import { buildQuestionXml } from '../src/xml';
 import { expect, test } from 'vitest';
 
 test('generated quiz object matches Canvas export model', () => {

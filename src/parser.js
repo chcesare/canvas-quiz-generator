@@ -26,10 +26,6 @@ function uniqueLocalId() {
   return String(id);
 }
 
-//To try: split by newline followed by points, title, or array, then split each question by line?
-//Or, reduce
-
-// Question "context"
 export function parseQuestionsAndAnswers(text) {
   let questions = [];
   let question;
@@ -56,8 +52,6 @@ export function parseQuestionsAndAnswers(text) {
     } else if ((match = line.match(/^ *Type *: *(?:(E)|(MC|TF|MA))?/i))) {
       if (!match[1] && !match[2]) {
         throw failure(new Error(`Please specify a question type on line ${i + 1}`), i);
-
-        //throw new Error(`Please specify a question type on line ${i + 1}`);
       }
       if (questions[index]) {
         if (match[1]) {
