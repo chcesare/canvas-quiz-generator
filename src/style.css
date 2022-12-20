@@ -34,51 +34,51 @@ h2 {
 }
 
 .instructions h2:not(:first-child) {
-  margin-top: 8%;
+  margin-top: 1.3em;
 }
 
 h3 {
-  margin-top: 8%;
-  margin-bottom: 1%;
+  margin-top: 1.7em;
+  margin-bottom: 0.5em;
 }
 
 p {
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.5em;
 }
 
 div > input {
-  margin: 10px;
+  margin: 0.6em;
 }
 
 input[type='text'] {
   width: 26vw;
-  padding: 10px;
-  font-size: 16px;
+  padding: 0.6em;
+  font-size: 1rem;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 2px #ccc;
 }
 
 form textarea {
-  margin: 10px;
+  margin: 0.7em;
   width: 34vw;
   height: 44vh;
   border: 1px solid #ccc;
-  padding: 10px;
-  font-size: 16px;
+  padding: 0.7em;
+  font-size: 1rem;
   box-shadow: 2px 2px 2px #ccc;
 }
 
 div > button {
-  margin: 10px;
+  margin: 0.4em;
 }
 
 button[type='submit'] {
   background-color: #333;
   color: #fff;
-  padding: 10px 20px;
+  padding: 0.65em 1.3em;
   border: none;
-  font-size: 16px;
+  font-size: 1rem;
   box-shadow: 2px 2px 2px #ccc;
 }
 
@@ -90,7 +90,7 @@ button:hover {
   background-color: #555;
 }
 
-button:disabled {
+button[aria-disabled='true'] {
   color: rgb(139, 139, 139);
 }
 
@@ -113,7 +113,7 @@ button:disabled {
 }
 
 .instructions {
-  padding: 0 15px;
+  padding: 0 1em;
 }
 
 .question-example {
@@ -132,9 +132,8 @@ button:disabled {
   background-color: rgb(139, 139, 139);
   border-radius: 0 100% 100% 0;
   --tab-height: 13.5vh;
-  --tab-width: 1.4vw;
   height: var(--tab-height);
-  width: var(--tab-width);
+  width: 1.4vw;
   min-width: 22px;
   position: absolute;
   top: calc(50vh - var(--tab-height) / 2);

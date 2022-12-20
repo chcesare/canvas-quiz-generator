@@ -15,7 +15,7 @@ class Question {
 
 //Answer IDs only need to be locally unique, so using function very similar to function in Canvas exporter here:
 //https://github.com/instructure/canvas-lms/blob/c2cba46851df512ab26e827e4bdad76b848f6db9/gems/plugins/qti_exporter/lib/qti/assessment_item_converter.rb
-let ids = {};
+const ids = {};
 function uniqueLocalId() {
   let id;
   id = Math.floor(Math.random() * 100000);
@@ -27,7 +27,7 @@ function uniqueLocalId() {
 }
 
 export function parseQuestionsAndAnswers(text) {
-  let questions = [];
+  const questions = [];
   let question;
   let index = 0;
 
@@ -40,7 +40,7 @@ export function parseQuestionsAndAnswers(text) {
   text.split(/\r?\n/).forEach((line, i) => {
     let match;
     if ((match = line.match(/^ *Points? *: *(\d+.?\d*)?/i))) {
-      let points = Number(match[1]);
+      const points = Number(match[1]);
       if (isNaN(points) || !points) {
         throw failure(Error(`Please insert a valid point value on line ${i + 1}`), i);
       }
@@ -71,8 +71,8 @@ export function parseQuestionsAndAnswers(text) {
       }
     } else if ((match = line.match(/^ *(\*)?[a-z]\)/))) {
       line = line.slice(match[0].length).trim();
-      let answer = { text: line, correct: false, id: uniqueLocalId() };
-      let answers = question.answers;
+      const answer = { text: line, correct: false, id: uniqueLocalId() };
+      const answers = question.answers;
       question.answerIds.push(answer.id);
       if (match[1] == '*') {
         answer.correct = true;

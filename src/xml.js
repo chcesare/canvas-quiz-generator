@@ -4,12 +4,12 @@ import { nanoid } from 'nanoid';
 export function buildAssessmentXml(questions, quizTitle, quizId) {
   const quiz = document.implementation.createDocument('', '', null);
 
-  let title = quizTitle;
-  let id = quizId;
+  const title = quizTitle;
+  const id = quizId;
   let totalPoints = 0;
 
   function elt(name, attrs, ...children) {
-    let dom = quiz.createElement(name);
+    const dom = quiz.createElement(name);
     if (attrs) {
       for (let attr of Object.keys(attrs)) {
         dom.setAttribute(attr, attrs[attr]);
@@ -24,7 +24,7 @@ export function buildAssessmentXml(questions, quizTitle, quizId) {
 
   const pi = quiz.createProcessingInstruction('xml', 'version="1.0" encoding="UTF-8"');
   quiz.insertBefore(pi, quiz.firstChild);
-  let questestinterop = quiz.createElement('questestinterop');
+  const questestinterop = quiz.createElement('questestinterop');
   questestinterop.setAttribute('xmlns', 'http://www.imsglobal.org/xsd/ims_qtiasiv1p2');
   questestinterop.setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
   questestinterop.setAttribute(
@@ -32,7 +32,7 @@ export function buildAssessmentXml(questions, quizTitle, quizId) {
     'http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd'
   );
 
-  let assessment = elt('assessment', { ident: id, title: title });
+  const assessment = elt('assessment', { ident: id, title: title });
   assessment.appendChild(
     elt(
       'qtimetadata',
@@ -45,7 +45,7 @@ export function buildAssessmentXml(questions, quizTitle, quizId) {
       )
     )
   );
-  let section = elt('section', { ident: 'root_section' });
+  const section = elt('section', { ident: 'root_section' });
 
   for (let question of questions) {
     if (question.type === 'multiple_choice_question') {
@@ -72,14 +72,14 @@ export function buildAssessmentXml(questions, quizTitle, quizId) {
 
     totalPoints += question.points;
 
-    let item = elt('item', { ident: question.id, title: 'Question' });
+    const item = elt('item', { ident: question.id, title: 'Question' });
     //Start with empty string to make sure element doesn't self close:
     let answerIds = '';
     if (question.type != 'essay_question') {
       answerIds = question.answerIds.join(',');
     }
 
-    let itemmetadata = elt(
+    const itemmetadata = elt(
       'itemmetadata',
       {},
       elt(
@@ -113,7 +113,7 @@ export function buildAssessmentXml(questions, quizTitle, quizId) {
     );
     item.appendChild(itemmetadata);
 
-    let presentation = elt(
+    const presentation = elt(
       'presentation',
       {},
       elt('material', {}, elt('mattext', { texttype: 'text/html' }, question.text))
@@ -130,14 +130,14 @@ export function buildAssessmentXml(questions, quizTitle, quizId) {
       );
     } else {
       if (question.type == 'multiple_answers_question') rcardinality = 'Multiple';
-      let response_lid = elt('response_lid', {
+      const response_lid = elt('response_lid', {
         ident: 'response1',
         rcardinality: rcardinality,
       });
-      let render_choice = quiz.createElement('render_choice');
+      const render_choice = quiz.createElement('render_choice');
 
       for (let answer of question.answers) {
-        let response_label = elt(
+        const response_label = elt(
           'response_label',
           { ident: answer.id },
           elt('material', {}, elt('mattext', { texttype: 'text/plain' }, answer.text))
@@ -150,7 +150,7 @@ export function buildAssessmentXml(questions, quizTitle, quizId) {
     }
     item.appendChild(presentation);
 
-    let resprocessing = elt(
+    const resprocessing = elt(
       'resprocessing',
       {},
       elt(
@@ -165,13 +165,13 @@ export function buildAssessmentXml(questions, quizTitle, quizId) {
       )
     );
 
-    let respcondition = elt('respcondition', { continue: 'No' });
-    let conditionvar = quiz.createElement('conditionvar');
+    const respcondition = elt('respcondition', { continue: 'No' });
+    const conditionvar = quiz.createElement('conditionvar');
 
     if (question.type == 'multiple_answers_question') {
-      let and = quiz.createElement('and');
+      const and = quiz.createElement('and');
       for (let answer of question.answers) {
-        let varequal = elt('varequal', { respident: 'response1' }, answer.id);
+        const varequal = elt('varequal', { respident: 'response1' }, answer.id);
         if (answer.correct == false) {
           and.appendChild(elt('not', {}, varequal));
         } else {

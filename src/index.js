@@ -21,19 +21,22 @@ tab.addEventListener('click', () => {
 });
 
 textArea.addEventListener('input', () => {
-  button.disabled = false;
+  button.setAttribute('aria-disabled', 'false');
 });
 
 titleInput.addEventListener('input', () => {
-  button.disabled = false;
+  button.setAttribute('aria-disabled', 'false');
 });
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
+  if (button.getAttribute('aria-disabled') === 'true') {
+    return;
+  }
   if (errorMessage) {
     errorMessage.remove();
   }
-  button.disabled = true;
+  button.setAttribute('aria-disabled', 'true');
   try {
     const input = textArea.value;
     const title = escapeHTML(titleInput.value);
@@ -63,14 +66,14 @@ form.addEventListener('submit', (e) => {
 });
 
 function escapeHTML(string) {
-  var pre = document.createElement('pre');
-  var text = document.createTextNode(string);
+  const pre = document.createElement('pre');
+  const text = document.createTextNode(string);
   pre.appendChild(text);
   return pre.innerHTML;
 }
 
 async function createZip(title, id, assessmentXMLString, xmlMetadataString, imsManifestString) {
-  // define what we want in the ZIP
+  //Define what we want in the ZIP
   const assessmentXML = {
     name: `${id}/${id}.xml`,
     lastModified: new Date(),
@@ -87,7 +90,7 @@ async function createZip(title, id, assessmentXMLString, xmlMetadataString, imsM
     input: imsManifestString,
   };
   const nonCcAssessmentsFolder = { name: 'non_cc_assessment/' };
-  // get the ZIP stream in a Blob
+  //Get the ZIP stream in a Blob
   const blob = await downloadZip([
     assessmentXML,
     xmlMetadata,
@@ -95,7 +98,7 @@ async function createZip(title, id, assessmentXMLString, xmlMetadataString, imsM
     nonCcAssessmentsFolder,
   ]).blob();
 
-  // make and click a temporary link to download the Blob
+  //Make and click a temporary link to download the Blob
   const link = document.createElement('a');
   const url = URL.createObjectURL(blob);
   link.href = url;
@@ -103,7 +106,6 @@ async function createZip(title, id, assessmentXMLString, xmlMetadataString, imsM
   link.click();
   link.remove();
 
-  // in real life, don't forget to revoke your Blob URLs if you use them
   URL.revokeObjectURL(url);
 }
 
