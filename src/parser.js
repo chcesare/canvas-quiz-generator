@@ -88,7 +88,7 @@ export function parseQuestionsAndAnswers(text) {
       (match = line.match(/^( *.+)/) && question && question.text && question.answers.length == 0)
     ) {
       question.text += `<p>${line.trim()}</p>`;
-    } else if ((match = line.match(/^ *.+/))) {
+    } else if ((match = line.match(/^ *\S+/))) {
       throw failure(Error(`Unexpected input on line ${i + 1}`), i);
     }
   });
